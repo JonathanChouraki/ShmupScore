@@ -45,6 +45,11 @@ class Game
      */
     private $developer;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Score", mappedBy="game")
+     **/
+    private $scores;
+
 
     /**
      * Get id
@@ -123,5 +128,45 @@ class Game
     public function getDeveloper()
     {
         return $this->developer;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->scores = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add scores
+     *
+     * @param \AppBundle\Entity\Score $scores
+     * @return Game
+     */
+    public function addScore(\AppBundle\Entity\Score $scores)
+    {
+        $this->scores[] = $scores;
+
+        return $this;
+    }
+
+    /**
+     * Remove scores
+     *
+     * @param \AppBundle\Entity\Score $scores
+     */
+    public function removeScore(\AppBundle\Entity\Score $scores)
+    {
+        $this->scores->removeElement($scores);
+    }
+
+    /**
+     * Get scores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getScores()
+    {
+        return $this->scores;
     }
 }
