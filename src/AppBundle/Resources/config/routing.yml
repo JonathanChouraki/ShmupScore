@@ -1,0 +1,7 @@
+app_score:
+    type:     rest
+    resource: AppBundle\Controller\ScoreController
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
