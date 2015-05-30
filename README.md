@@ -21,6 +21,13 @@ Dependencies
     * composer require "phpunit/phpunit" "3.7.*"
     * composer require "liip/functional-test-bundle"
 
+
+Documentation
+-------------
+
+The documentation can be found in api/doc.
+
+
 Misc
 ----
 
