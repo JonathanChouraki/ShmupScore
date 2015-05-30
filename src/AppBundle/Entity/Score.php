@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Score
 {
     /**
+     * the score id
      * @var integer
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -23,6 +23,7 @@ class Score
     private $id;
 
     /**
+     * the score value
      * @var integer
      *
      * @ORM\Column(name="value", type="integer")
@@ -31,6 +32,7 @@ class Score
     private $value;
 
     /**
+     * the score mode (eg: Easy, Normal, Hard)
      * @var string
      *
      * @ORM\Column(name="mode", type="string", length=255, nullable=true)
@@ -38,6 +40,7 @@ class Score
     private $mode;
 
     /**
+     * the player for this score
      * @ORM\ManyToOne(targetEntity="Player", inversedBy="scores")
      * @ORM\JoinColumn(name="player_id", referencedColumnName="id", nullable=false)
      * @Assert\NotBlank(message="Score must have a player")
@@ -45,6 +48,7 @@ class Score
     private $player;
 
     /**
+     * the game for this score
      * @ORM\ManyToOne(targetEntity="Game", inversedBy="scores")
      * @ORM\JoinColumn(name="game_id", referencedColumnName="id", nullable=false)
      * @Assert\NotBlank(message="Score must have a game")

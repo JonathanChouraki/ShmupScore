@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Game
 {
     /**
+     * the game id
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -23,6 +24,7 @@ class Game
     private $id;
 
     /**
+     * the game name 
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -31,6 +33,7 @@ class Game
     private $name;
 
     /**
+     * the game version (eg: black label, 1.2, etc)
      * @var string
      *
      * @ORM\Column(name="version", type="string", length=255, nullable=true)
@@ -38,6 +41,7 @@ class Game
     private $version;
 
     /**
+     * the game developer
      * @var string
      *
      * @ORM\Column(name="developer", type="string", length=255)
@@ -46,6 +50,7 @@ class Game
     private $developer;
 
     /**
+     * the scores for this game
      * @ORM\OneToMany(targetEntity="Score", mappedBy="game")
      **/
     private $scores;
