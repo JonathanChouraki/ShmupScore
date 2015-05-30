@@ -14,18 +14,18 @@ Restful to allow use of third parties site.
 Dependencies
 ------------
 
-composer require "friendsofsymfony/rest-bundle"
-composer require "jms/serializer-bundle"
-composer require "nelmio/api-doc-bundle"
-composer require "doctrine/doctrine-fixtures-bundle"
-composer require "phpunit/phpunit" "3.7.*"
-composer require "liip/functional-test-bundle"
+    * composer require "friendsofsymfony/rest-bundle"
+    * composer require "jms/serializer-bundle"
+    * composer require "nelmio/api-doc-bundle"
+    * composer require "doctrine/doctrine-fixtures-bundle"
+    * composer require "phpunit/phpunit" "3.7.*"
+    * composer require "liip/functional-test-bundle"
 
 Misc
 ----
 
 Database
 
-user: shmup_score
-password: 63mSByfjyXD2dpvb
+    * user: shmup_score
+    * password: 63mSByfjyXD2dpvb
 
