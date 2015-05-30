@@ -35,7 +35,7 @@ class ScoreController extends FOSRestController
 	 */
 	public function getScoreAction($id)
 	{
-		$score = $this->getDoctrine()->getRepository("AppBundle:Score")->findById($id);
+		$score = $this->getDoctrine()->getRepository("AppBundle:Score")->findOneById($id);
 		if(!$score)
 		{
 			throw new ResourceNotFoundException('Score not found');
@@ -45,5 +45,10 @@ class ScoreController extends FOSRestController
             ->setTemplate("AppBundle:Score:getScore.html.twig")
             ->setTemplateVar('score'); 	
         return $this->handleView($view);
+	}
+
+	public function postScoreAction()
+	{
+
 	}
 }
