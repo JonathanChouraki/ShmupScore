@@ -22,7 +22,6 @@ class ScoreControllerTest extends JsonTest
 	    $response = $this->client->getResponse();
 	    $this->assertJsonResponse($response); 
 	    $content = json_decode($response->getContent(), true);
-	    $content = $content[0];
         $this->assertTrue(isset($content['id']));
         $this->assertTrue(isset($content['player']));
         $this->assertTrue(isset($content['game']));
