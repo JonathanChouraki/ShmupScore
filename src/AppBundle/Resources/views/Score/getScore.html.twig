@@ -1,0 +1,6 @@
+<h4>Score</h4>
+
+{{ score.value }} points by {{ score.player.name }} on {{ score.game.name }}
+{% if score.mode is not null %}
+on {{score.mode }} mode
+{% endif %}
