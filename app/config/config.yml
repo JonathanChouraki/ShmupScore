@@ -9,6 +9,7 @@ parameters:
     locale: en
 
 framework:
+    csrf_protection: false
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
