@@ -12,6 +12,8 @@ use FOS\RestBundle\Util\Codes;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 use AppBundle\Form\ScoreType;
+//to be removed
+use AppBundle\Entity\Score;
 
 class ScoreController extends FOSRestController
 {
@@ -47,8 +49,52 @@ class ScoreController extends FOSRestController
         return $this->handleView($view);
 	}
 
-	public function postScoreAction()
+	/**
+	 * Create a new Score
+	 *
+	 * @ApiDoc(
+	 *   resource = true,
+	 *   description = "Create a new Score",
+	 *   input = "AppBundle\Form\ScoreType",
+	 *   statusCodes = {
+	 *     201 = "Returned when score is successfully created",
+	 *     400 = "Returned when the form contains bad parameters"
+	 *   }
+	 * )
+	 *
+	 *
+	 * @param int $id the score id
+	 *
+	 */
+	public function postScoreAction(Request $request)
 	{
 
+		$score = new Score();
+		$form = $this->createForm(new ScoreType(), $score);
+		$form->bind($request);
+        if ($form->isValid()) 
+        {
+        	$em = $this->getDoctrine()->getManager();
+        	$em->persist($score);
+        	$em->flush();
+            $view = $this->routeRedirectView('get_score', array('id' => $score->getId()), Codes::HTTP_CREATED);
+        } 
+        else {
+            $view = $this->view($form);
+            $view->setTemplate('AppBundle:Score:newScore.html.twig');
+        }
+        return $this->handleView($view);
+		
+		
+	}
+
+	public function newScoreAction()
+	{
+		$score = new Score();
+		$form = $this->createForm(new ScoreType(), $score);
+		$view = $this->view($form);
+		$view->setTemplateVar("form");
+        $view->setTemplate('AppBundle:Score:newScore.html.twig');
+        return $this->handleView($view);
 	}
 }

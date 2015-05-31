@@ -42,4 +42,64 @@ class ScoreControllerTest extends JsonTest
 	    );
 	    $this->assertJsonResponse($this->client->getResponse(), 404); 
 	}
+
+	public function testPostJson()
+	{
+		$this->loadFixtures(array('AppBundle\DataFixtures\ORM\LoadScoreData'));
+		$route =  $this->getUrl('post_score', array('_format' => 'json'));
+	    $this->client->request(
+	        'POST',
+	        $route,
+	        array(),
+	        array(),
+	        array('CONTENT_TYPE' => 'application/json'),
+	        '{"score":{"value": 1, "player":1, "game":1}}'
+	    );
+	    $this->assertJsonResponse($this->client->getResponse(), 201, false);
+	}
+
+	public function testPostReturn400WhenBadParametersJson()
+	{
+		$this->loadFixtures(array('AppBundle\DataFixtures\ORM\LoadScoreData'));
+		$route =  $this->getUrl('post_score', array('_format' => 'json'));
+	    $this->client->request(
+	        'POST',
+	        $route,
+	        array(),
+	        array(),
+	        array('CONTENT_TYPE' => 'application/json'),
+	        '{"score":{"value": a, "player":1, "game":1}}'
+	    );
+	    $this->assertJsonResponse($this->client->getResponse(), 400);
+	}
+
+	public function testPostReturn400WhenPlayerNotFoundJson()
+	{
+		$this->loadFixtures(array('AppBundle\DataFixtures\ORM\LoadScoreData'));
+		$route =  $this->getUrl('post_score', array('_format' => 'json'));
+	    $this->client->request(
+	        'POST',
+	        $route,
+	        array(),
+	        array(),
+	        array('CONTENT_TYPE' => 'application/json'),
+	        '{"score":{"value": a, "player":999, "game":1}}'
+	    );
+	    $this->assertJsonResponse($this->client->getResponse(), 400);
+	}
+
+	public function testPostReturn400WhenGameNotFoundJson()
+	{
+		$this->loadFixtures(array('AppBundle\DataFixtures\ORM\LoadScoreData'));
+		$route =  $this->getUrl('post_score', array('_format' => 'json'));
+	    $this->client->request(
+	        'POST',
+	        $route,
+	        array(),
+	        array(),
+	        array('CONTENT_TYPE' => 'application/json'),
+	        '{"score":{"value": a, "player":1, "game":999}}'
+	    );
+	    $this->assertJsonResponse($this->client->getResponse(), 400);
+	}
 }
