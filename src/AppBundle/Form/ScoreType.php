@@ -16,7 +16,7 @@ class ScoreType extends AbstractType
     {
         $builder
             ->add('value', 'integer', array("description" => "the score value"))
-            ->add('mode', 'text', array("description" => "the score mode", "required" => false))
+            ->add('difficulty', 'text', array("description" => "the score difficulty", "required" => false))
             ->add('player', 'entity', array("description" => "the player who has done the score", 'class'=> 'AppBundle:Player', "property" => "name"))
             ->add('game', 'entity', array("description" => "the game for wich the score was done", 'class'=> 'AppBundle:Game', "property" => "name"))
         ;
