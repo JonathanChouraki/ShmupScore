@@ -1,0 +1,4 @@
+services:
+    app.score.manager:
+        class: "AppBundle\Manager\ScoreManager"
+        arguments: [@doctrine.orm.entity_manager, "AppBundle\Entity\Score", @form.factory]

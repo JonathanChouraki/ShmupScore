@@ -32,12 +32,12 @@ class Score
     private $value;
 
     /**
-     * the score mode (eg: Easy, Normal, Hard)
+     * the score difficulty (eg: Easy, Normal, Hard)
      * @var string
      *
-     * @ORM\Column(name="mode", type="string", length=255, nullable=true)
+     * @ORM\Column(name="difficulty", type="string", length=255, nullable=true)
      */
-    private $mode;
+    private $difficulty;
 
     /**
      * the player for this score
@@ -89,29 +89,6 @@ class Score
     }
 
     /**
-     * Set mode
-     *
-     * @param string $mode
-     * @return Score
-     */
-    public function setMode($mode)
-    {
-        $this->mode = $mode;
-
-        return $this;
-    }
-
-    /**
-     * Get mode
-     *
-     * @return string 
-     */
-    public function getMode()
-    {
-        return $this->mode;
-    }
-
-    /**
      * Set player
      *
      * @param \AppBundle\Entity\Player $player
@@ -155,5 +132,28 @@ class Score
     public function getGame()
     {
         return $this->game;
+    }
+
+    /**
+     * Set difficulty
+     *
+     * @param string $difficulty
+     * @return Score
+     */
+    public function setDifficulty($difficulty)
+    {
+        $this->difficulty = $difficulty;
+
+        return $this;
+    }
+
+    /**
+     * Get difficulty
+     *
+     * @return string 
+     */
+    public function getDifficulty()
+    {
+        return $this->difficulty;
     }
 }

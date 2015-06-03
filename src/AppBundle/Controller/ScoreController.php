@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use AppBundle\Exception\InvalidFormException;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations;
@@ -12,7 +13,6 @@ use FOS\RestBundle\Util\Codes;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 use AppBundle\Form\ScoreType;
-//to be removed
 use AppBundle\Entity\Score;
 
 class ScoreController extends FOSRestController
@@ -37,7 +37,7 @@ class ScoreController extends FOSRestController
 	 */
 	public function getScoreAction($id)
 	{
-		$score = $this->getDoctrine()->getRepository("AppBundle:Score")->findOneById($id);
+		$score = $this->get('app.score.manager')->get($id);
 		if(!$score)
 		{
 			throw new ResourceNotFoundException('Score not found');
@@ -57,7 +57,7 @@ class ScoreController extends FOSRestController
 	 *   description = "Create a new Score",
 	 *   input = "AppBundle\Form\ScoreType",
 	 *   statusCodes = {
-	 *     201 = "Returned when score is successfully created",
+	 *     201 = "Returned when a score is successfully created",
 	 *     400 = "Returned when the form contains bad parameters"
 	 *   }
 	 * )
@@ -68,26 +68,39 @@ class ScoreController extends FOSRestController
 	 */
 	public function postScoreAction(Request $request)
 	{
-
-		$score = new Score();
-		$form = $this->createForm(new ScoreType(), $score);
-		$form->bind($request);
-        if ($form->isValid()) 
-        {
-        	$em = $this->getDoctrine()->getManager();
-        	$em->persist($score);
-        	$em->flush();
-            $view = $this->routeRedirectView('get_score', array('id' => $score->getId()), Codes::HTTP_CREATED);
-        } 
-        else {
-            $view = $this->view($form);
-            $view->setTemplate('AppBundle:Score:newScore.html.twig');
-        }
-        return $this->handleView($view);
-		
-		
+		try
+		{
+			$scoreType = new ScoreType();
+			$this->get('app.score.manager')->post($request->request->get($scoreType->getName()));
+			$score = $this->get('app.score.manager')->post($request->request->get($scoreType->getName()));
+			$routeOptions = array(
+	           'id' => $score->getId(),
+	           '_format' => $request->get('_format')
+            );
+	        return $this->routeRedirectView('get_score', $routeOptions, Codes::HTTP_CREATED);
+    	}
+    	catch(InvalidFormException $e)
+    	{
+    		return $this->view($e->getForm());
+    	}
 	}
 
+	/**
+	 * Return a form for submitting a score
+	 *
+	 * @ApiDoc(
+	 *   resource = true,
+	 *   description = "Return a form for submitting a score",
+	 *   output = "AppBundle\Form\ScoreType",
+	 *   statusCodes = {
+	 *     200 = "Returned when the form is send",
+	 *   }
+	 * )
+	 *
+	 *
+	 * @param int $id the score id
+	 *
+	 */
 	public function newScoreAction()
 	{
 		$score = new Score();

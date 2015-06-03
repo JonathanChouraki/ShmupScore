@@ -102,4 +102,17 @@ class ScoreControllerTest extends JsonTest
 	    );
 	    $this->assertJsonResponse($this->client->getResponse(), 400);
 	}
+
+	public function testNewJson()
+	{
+		$route =  $this->getUrl('new_score', array('_format' => 'json'));
+	    $this->client->request(
+	        'GET',
+	        $route,
+	        array(),
+	        array(),
+	        array('CONTENT_TYPE' => 'application/json')
+	    );
+	    $this->assertJsonResponse($this->client->getResponse(), 200);
+	}
 }
