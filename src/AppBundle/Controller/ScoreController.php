@@ -71,7 +71,6 @@ class ScoreController extends FOSRestController
 		try
 		{
 			$scoreType = new ScoreType();
-			$this->get('app.score.manager')->post($request->request->get($scoreType->getName()));
 			$score = $this->get('app.score.manager')->post($request->request->get($scoreType->getName()));
 			$routeOptions = array(
 	           'id' => $score->getId(),
