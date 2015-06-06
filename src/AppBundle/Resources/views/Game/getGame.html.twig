@@ -1,0 +1,14 @@
+<h2>{{ game.name }} developed by {{ game.developer }}</h2>
+
+<h4>Scores</h4>
+{% if game.scores %}
+	{% for score in game.scores %}
+		{{ score.value }} points by {{ score.player.name }} on {{ score.game.name }}
+		{% if score.difficulty is not null %}
+		on {{score.difficulty }} difficulty
+		{% endif %}
+		<br/>
+	{% endfor %}
+{% else %}
+	No score yer.
+{% endif %}

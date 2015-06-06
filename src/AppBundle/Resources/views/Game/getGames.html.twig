@@ -1,0 +1,8 @@
+<h2> Game List </h2>
+{% if games %}
+	{% for game in games %}
+		<a href="{{ path('get_game', {"id" : game.id }) }}">{{ game.name }}</a> developed by {{ game.developer }}
+	{% endfor %}
+{% else %}
+	No game yet.
+{% endif %}
