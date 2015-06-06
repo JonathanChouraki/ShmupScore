@@ -9,7 +9,7 @@ use AppBundle\Form\ScoreType;
 use AppBundle\Exception\InvalidFormException;
 
 
-class ScoreManager
+class ScoreManager implements ManagerInterface
 {
 	private $om;
     private $entityClass;
@@ -29,16 +29,19 @@ class ScoreManager
 		return $this->repository->findOneById($id);
 	}
 
+	public function all($limit = 5, $offset = 0)
+	{
+		/** 
+		 * @todo
+		 */
+		//return $this->repository->findAllByIdLimitOffset($id);
+	}
+
 	public function post(array $parameters)
 	{
 		return $this->processForm(new Score(), $parameters);
 	}
-
-	public function put(Score $score, $parameters)
-	{
-		return $this->processForm($score, $parameters);
-	}
-
+	
 	private function processForm(Score $score, array $parameters)
 	{
 		$form = $this->formFactory->create(new ScoreType(), $score);
