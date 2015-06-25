@@ -10,6 +10,8 @@ Web application to manage and keep track of score for shmup game (at first).
 An entry consist of a user, a score, a game (with platform), and optionnal link to video / screenshot / replay file.
 Restful to allow use of third parties site.
 
+[![Build Status](https://travis-ci.org/JonathanChouraki/ShmupScore.svg?branch=master)](https://travis-ci.org/JonathanChouraki/ShmupScore)
+
 
 Dependencies
 ------------
@@ -36,5 +38,4 @@ Database
     * user: shmup_score
     * password: 63mSByfjyXD2dpvb
 
-[![Build Status](https://travis-ci.org/JonathanChouraki/ShmupScore.svg?branch=master)](https://travis-ci.org/JonathanChouraki/ShmupScore)
 
