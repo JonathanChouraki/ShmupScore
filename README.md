@@ -36,3 +36,5 @@ Database
     * user: shmup_score
     * password: 63mSByfjyXD2dpvb
 
+[![Build Status](https://travis-ci.org/JonathanChouraki/ShmupScore.svg?branch=master)](https://travis-ci.org/JonathanChouraki/ShmupScore)
+
