@@ -20,7 +20,7 @@ class GameControllerTest extends JsonTest
 	        array('CONTENT_TYPE' => 'application/json')
 	    );
 	    $response = $this->client->getResponse();
-	    $this->assertJsonResponse($response); 
+	    $this->assertJsonResponse($response);
 	    $content = json_decode($response->getContent(), true);
         $this->assertTrue(isset($content['id']));
         $this->assertTrue(isset($content['name']));
@@ -28,11 +28,11 @@ class GameControllerTest extends JsonTest
         $this->assertTrue(isset($content['scores']));
 	}
 
-	public function testGetReturn404WhenScoreNotFoundJson()
+	public function testGetReturn404WhenGameNotFoundJson()
 	{
 		$this->loadFixtures(array());
         $score = LoadScoreData::$score;
-        $route =  $this->getUrl('get_score', array('id'=> 1, '_format' => 'json'));
+        $route =  $this->getUrl('get_game', array('id'=> 1, '_format' => 'json'));
       	$this->client->request(
         	'GET',
 	        $route,
@@ -40,7 +40,7 @@ class GameControllerTest extends JsonTest
 	        array(),
 	        array('CONTENT_TYPE' => 'application/json')
 	    );
-	    $this->assertJsonResponse($this->client->getResponse(), 404); 
+	    $this->assertJsonResponse($this->client->getResponse(), 404);
 	}
 
 	public function testGetListJson()
@@ -56,7 +56,7 @@ class GameControllerTest extends JsonTest
 	        array('CONTENT_TYPE' => 'application/json')
 	    );
 	    $response = $this->client->getResponse();
-	    $this->assertJsonResponse($response); 
+	    $this->assertJsonResponse($response);
 	    $content = json_decode($response->getContent(), true);
 	    $this->assertTrue(is_array($content));
 	    $content = $content[0];
