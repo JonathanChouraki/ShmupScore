@@ -15,3 +15,7 @@ before_script:
     - composer install
 
 script: phpunit -c  app --coverage-text
+
+notifications:
+    email:
+		- jonathan.chouraki@gmail.com
