@@ -18,4 +18,4 @@ script: phpunit -c  app --coverage-text
 
 notifications:
     email:
-		- jonathan.chouraki@gmail.com
+        - jonathan.chouraki@gmail.com
