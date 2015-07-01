@@ -68,7 +68,7 @@ class ScoreControllerTest extends JsonTest
 	        array(),
 	        array(),
 	        array('CONTENT_TYPE' => 'application/json'),
-	        '{"score":{"value": a, "player":1, "game":1}}'
+	        '{"score":{"value": "a", "player":1, "game":1}}'
 	    );
 	    $this->assertJsonResponse($this->client->getResponse(), 400);
 	}
@@ -83,7 +83,7 @@ class ScoreControllerTest extends JsonTest
 	        array(),
 	        array(),
 	        array('CONTENT_TYPE' => 'application/json'),
-	        '{"score":{"value": a, "player":999, "game":1}}'
+	        '{"score":{"value": 1, "player":999, "game":1}}'
 	    );
 	    $this->assertJsonResponse($this->client->getResponse(), 400);
 	}
@@ -98,7 +98,22 @@ class ScoreControllerTest extends JsonTest
 	        array(),
 	        array(),
 	        array('CONTENT_TYPE' => 'application/json'),
-	        '{"score":{"value": a, "player":1, "game":999}}'
+	        '{"score":{"value": 1, "player":1, "game":999}}'
+	    );
+	    $this->assertJsonResponse($this->client->getResponse(), 400);
+	}
+
+	public function testPostReturn400WhenInvalidMessageIsSendJson()
+	{
+		$this->loadFixtures(array());
+		$route =  $this->getUrl('post_score', array('_format' => 'json'));
+	    $this->client->request(
+	        'POST',
+	        $route,
+	        array(),
+	        array(),
+	        array('CONTENT_TYPE' => 'application/json'),
+	        '{"score":{"value": a, "player":1, "game":1}}'
 	    );
 	    $this->assertJsonResponse($this->client->getResponse(), 400);
 	}
