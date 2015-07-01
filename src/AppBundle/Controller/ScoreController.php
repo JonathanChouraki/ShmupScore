@@ -12,7 +12,7 @@ use FOS\RestBundle\Util\Codes;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-use AppBundle\Form\ScoreType;
+use AppBundle\Form\Type\ScoreType;
 use AppBundle\Entity\Score;
 
 class ScoreController extends FOSRestController
