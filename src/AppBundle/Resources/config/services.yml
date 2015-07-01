@@ -1,7 +1,11 @@
 services:
     app.score.manager:
-        class: "AppBundle\Manager\ScoreManager"
-        arguments: [@doctrine.orm.entity_manager, "AppBundle\Entity\Score", @form.factory]
+        class: "AppBundle\Manager\Manager"
+        arguments: [@doctrine.orm.entity_manager, "AppBundle\Entity\Score", @form.factory, @app.form.type.score]
     app.game.manager:
-        class: "AppBundle\Manager\GameManager"
+        class: "AppBundle\Manager\Manager"
         arguments: [@doctrine.orm.entity_manager, "AppBundle\Entity\Game", @form.factory]
+    app.form.type.score:
+        class: AppBundle\Form\Type\ScoreType
+        tags:
+            - { name: form.type, alias: score }
